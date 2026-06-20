@@ -66,7 +66,7 @@ const registerUser = async () => {
 
     const response =
       await axios.post(
-        "https://hireready-xy0d.onrender.com/register",
+        "https://hireready-backend-44rn.onrender.com/register",
         formData
       );
 
@@ -141,7 +141,7 @@ const loginUser = async () => {
 
     const response =
       await axios.post(
-        "https://hireready-xy0d.onrender.com/login",
+        "https://hireready-backend-44rn.onrender.com/login",
         formData
       );
 
