@@ -58,7 +58,7 @@ if (!jobDescription.trim()) {
 
     const response =
       await axios.post(
-        "http://127.0.0.1:8000/generate-cover-letter",
+        "https://hireready-xy0d.onrender.com/generate-cover-letter",
         formData
       );
       if (response.data.error) {

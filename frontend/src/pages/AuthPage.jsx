@@ -66,7 +66,7 @@ const registerUser = async () => {
 
     const response =
       await axios.post(
-        "http://127.0.0.1:8000/register",
+        "https://hireready-xy0d.onrender.com/register",
         formData
       );
 
@@ -141,7 +141,7 @@ const loginUser = async () => {
 
     const response =
       await axios.post(
-        "http://127.0.0.1:8000/login",
+        "https://hireready-xy0d.onrender.com/login",
         formData
       );
 

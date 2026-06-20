@@ -62,7 +62,7 @@ formData.append(
 
       const response =
         await axios.post(
-          "http://127.0.0.1:8000/generate-interview-questions",
+          "https://hireready-xy0d.onrender.com/generate-interview-questions",
           formData
         );
         if (response.data.error) {
@@ -128,7 +128,7 @@ setQuestions(allQuestions);
 
     const response =
       await axios.post(
-        "http://127.0.0.1:8000/evaluate-answer",
+        "https://hireready-xy0d.onrender.com/evaluate-answer",
         formData
       );
    if (response.data.error) {

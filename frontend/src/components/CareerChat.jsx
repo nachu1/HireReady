@@ -169,7 +169,7 @@ formData.append(
 
   const result =
     await axios.post(
-      "http://127.0.0.1:8000/career-chat",
+      "https://hireready-xy0d.onrender.com/career-chat",
       formData
     );
     if (result.data.error) {

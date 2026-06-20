@@ -48,7 +48,7 @@ formData.append(
 
     const response =
       await axios.post(
-        "http://127.0.0.1:8000/improve-resume",
+        "https://hireready-xy0d.onrender.com/improve-resume",
         formData
       );
      if (response.data.error) {
@@ -99,7 +99,7 @@ formData.append(
 
     const response =
       await axios.get(
-        `http://127.0.0.1:8000/download-ai-resume/${resumeId}`,
+        `https://hireready-xy0d.onrender.com/download-ai-resume/${resumeId}`,
         {
           responseType: "blob"
         }

@@ -54,7 +54,7 @@ useEffect(() => {
       const response =
         await axios.get(
 
-          `http://127.0.0.1:8000/current-resume/${userId}`
+          `https://hireready-xy0d.onrender.com/current-resume/${userId}`
 
         );
 
@@ -159,7 +159,7 @@ formData.append(
 
       const response =
   await axios.post(
-    "http://127.0.0.1:8000/analyze-resume",
+    "https://hireready-xy0d.onrender.com/analyze-resume",
     formData
   );
  if (response.data.error) {
