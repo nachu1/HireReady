@@ -479,17 +479,23 @@ def career_chat(
     try:
 
         response = model.generate_content(
-            prompt,
-            generation_config={
-                "temperature": 0.7
-            }
+          prompt,
+          generation_config={
+           "temperature": 0.7
+          }
         )
+        print("career chat is running")
+        text=response.text
 
+        text = response.text
+
+        text = text.replace("**", "")
+        text = text.replace("* ", "• ")
+        text = text.replace("\n*", "\n•")
+        text = text.replace("\n-", "\n•")
+        print(text)
         return {
-
-            "response":
-            response.text
-
+           "response": text
         }
 
     except Exception as e:

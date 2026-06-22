@@ -210,7 +210,7 @@ if (percentage >= 80) {
 
   return (
 
-    <div className="bg-white rounded-3xl shadow-xl p-6">
+    <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 max-w-5xl mx-auto">
       {error && (
 
   <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6">
@@ -228,10 +228,18 @@ if (percentage >= 80) {
 )}
 
       <div className="flex items-center gap-3 mb-2">
-  <UserRoundSearch size={32} />
-  <h2 className="text-3xl font-bold">
+
+  <div className="bg-blue-100 p-2 rounded-xl">
+    <UserRoundSearch
+      size={24}
+      className="text-blue-600"
+    />
+  </div>
+
+  <h2 className="text-2xl md:text-3xl font-bold">
     Mock Interview
   </h2>
+
 </div>
 
 {questions.length === 0 &&
@@ -246,13 +254,13 @@ if (percentage >= 80) {
 {questions.length === 0 &&
  !interviewFinished && (
 
-<div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6 border border-blue-100">
+<div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-4 md:p-6 mb-6 border border-blue-100">
 
   <h3 className="font-bold text-lg mb-3">
     What You'll Get
   </h3>
 
-  <div className="grid md:grid-cols-2 gap-3">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
     <div>✓ Resume-based questions</div>
     <div>✓ Technical questions</div>
@@ -270,11 +278,21 @@ if (percentage >= 80) {
 
   questionLoading ? (
 
-    <LoadingSpinner
-      text="Generating Questions..."
-    />
+  <div className="flex flex-col items-center justify-center py-20">
 
-  ) : (
+    <div className="w-16 h-16 border-[5px] border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+
+    <h3 className="mt-6 text-xl font-semibold text-slate-800">
+      Preparing Your Interview...
+    </h3>
+
+    <p className="mt-2 text-slate-500 text-center max-w-md">
+       Creating personalized interview questions based on your resume.
+    </p>
+
+  </div>
+
+) : (
 
    
 
@@ -282,7 +300,7 @@ if (percentage >= 80) {
 
   <button
   onClick={generateQuestions}
-  className="bg-blue-600 text-white px-8 py-4 rounded-2xl shadow-lg hover:bg-blue-700 transition"
+  className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-2xl shadow-lg transition"
 >
   Start Interview
 </button>
@@ -295,18 +313,37 @@ if (percentage >= 80) {
 
    {questions.length > 0 &&
  currentQuestion < questions.length &&
- !interviewFinished && (
+ !interviewFinished &&
+ !evaluation && (
 
-  <div className="mt-8">
+  evaluationLoading ? (
 
-    <h3 className="text-2xl font-bold mb-4">
+    <div className="flex flex-col items-center justify-center py-16">
+
+      <div className="w-16 h-16 border-[5px] border-green-600 border-t-transparent rounded-full animate-spin"></div>
+
+      <h3 className="mt-6 text-xl font-semibold text-slate-800">
+        Evaluating Your Answer...
+      </h3>
+
+      <p className="mt-2 text-slate-500 text-center max-w-md">
+        Our AI is reviewing your response and preparing detailed feedback.
+      </p>
+
+    </div>
+
+  ) : (
+
+    <div className="mt-8">
+
+    <h3 className="text-xl md:text-2xl font-bold mb-4">
 
       Question {currentQuestion + 1}
       of {questions.length}
 
     </h3>
 
-    <div className="bg-slate-50 p-6 rounded-xl">
+    <div className="bg-slate-50 p-4 md:p-6 rounded-2xl">
 
       {questions[currentQuestion]}
 
@@ -321,36 +358,32 @@ if (percentage >= 80) {
         )
       }
       placeholder="Type your answer..."
-      className="w-full border rounded-xl p-4 mt-4"
+     className="w-full border border-slate-300 rounded-2xl p-4 mt-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
 
  {!evaluation && (
 
-  evaluationLoading ? (
-
-    <LoadingSpinner
-      text="Evaluating Answer..."
-    />
-
-  ) : (
+ 
 
     <button
       onClick={submitAnswer}
-      className="bg-green-600 text-white px-6 py-3 rounded-xl mt-4"
+      className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl mt-4 transition"
     >
       Submit Answer
     </button>
 
-  )
+  
 
 )}
 
   </div>
 
+  )
+
 )}
 {evaluation && !interviewFinished && (
 
-  <div className="mt-6 bg-slate-50 p-6 rounded-xl">
+  <div className="mt-6 bg-slate-50 p-4 md:p-6 rounded-2xl shadow">
 
     <h3 className="text-2xl font-bold">
 
@@ -418,7 +451,7 @@ if (percentage >= 80) {
 
   <button
     onClick={nextQuestion}
-    className="bg-blue-600 text-white px-6 py-3 rounded-xl mt-6"
+    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl mt-6 transition"
   >
     Next Question
   </button>
@@ -429,7 +462,7 @@ if (percentage >= 80) {
   onClick={() =>
     setInterviewFinished(true)
   }
-  className="bg-green-600 text-white px-6 py-3 rounded-xl mt-6"
+  className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl mt-6 transition"
 >
   Finish Interview
 </button>
@@ -441,11 +474,14 @@ if (percentage >= 80) {
 )}
   {interviewFinished &&  (
 
-  <div className="mt-10 bg-gradient-to-r from-green-50 to-blue-50 p-10 rounded-3xl shadow-xl text-center">
+ <div className="mt-6 bg-gradient-to-r from-green-50 to-blue-50 p-5 md:p-8 rounded-3xl shadow-xl text-center">
 
     <div className="flex items-center justify-center gap-3">
-  <Trophy size={36} />
-  <h2 className="text-4xl font-bold text-green-700">
+ <Trophy
+  size={36}
+  className="text-yellow-500"
+/>
+  <h2 className="text-2xl md:text-4xl font-bold text-green-700">
     Interview Complete
   </h2>
 </div>
@@ -455,13 +491,13 @@ if (percentage >= 80) {
     Overall Score
   </p>
 
-  <h3 className="text-6xl font-bold text-blue-600">
+  <h3 className="text-5xl md:text-6xl font-bold text-blue-600">
     {percentage}%
   </h3>
 </div>
 
     <div className="mt-6">
-  <span className="bg-white px-6 py-3 rounded-full shadow font-semibold text-lg">
+  <span className="inline-block bg-white px-8 py-3 rounded-full shadow font-semibold text-lg mt-2">
     {performance}
   </span>
 </div>
@@ -477,7 +513,7 @@ if (percentage >= 80) {
   setInterviewFinished(false);
 
 }}
-      className="bg-blue-600 text-white px-6 py-3 rounded-xl mt-6"
+      className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl mt-8 transition"
     >
       Start New Interview
     </button>

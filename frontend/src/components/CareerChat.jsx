@@ -5,11 +5,12 @@ import {
 } from "react";
 import axios from "axios";
 import { MessageCircle } from "lucide-react";
-import { Send } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { Hand,Smile } from "lucide-react";
 import {
   Bot,
-  BriefcaseBusiness
+  BriefcaseBusiness,
+  Trash2
 } from "lucide-react";
 function CareerChat() {
 
@@ -20,6 +21,7 @@ function CareerChat() {
     useState("");
     const [messages, setMessages] =
   useState([]);
+  const [showClearDialog, setShowClearDialog] = useState(false);
   const messagesEndRef =
   useRef(null);
   
@@ -168,10 +170,10 @@ formData.append(
   
 
   const result =
-    await axios.post(
-      "https://hireready-xy0d.onrender.com/career-chat",
-      formData
-    );
+   await axios.post(
+  "https://hireready-xy0d.onrender.com/career-chat",
+  formData
+);
     if (result.data.error) {
 
   setError(
@@ -203,11 +205,35 @@ setMessage("");
 }
 
   };
-  
+  const clearChat = () => {
+
+  const resumeId =
+    localStorage.getItem(
+      "resume_id"
+    );
+
+  localStorage.removeItem(
+    `career_chat_${resumeId}`
+  );
+
+  setMessages([
+    {
+      sender: "ai",
+      text:
+`I can help with:
+• Resume Review
+• Interview Preparation
+• Career Guidance
+
+How can I help today?`
+    }
+  ]);
+
+};
 
   return (
 
-    <div className="bg-white rounded-3xl shadow-xl p-6">
+    <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 max-w-5xl mx-auto">
      {error && (
 
   <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6">
@@ -225,14 +251,32 @@ setMessage("");
 
 )}
 
-   <div className="flex items-center gap-3 mb-6">
-  <BriefcaseBusiness size={32} />
-  <h2 className="text-3xl font-bold">
-    Career Assistant
-  </h2>
+   <div className="flex items-center justify-between mb-6">
+
+  <div className="flex items-center gap-3">
+
+    <BriefcaseBusiness size={32} />
+
+    <h2 className="text-2xl md:text-3xl font-bold">
+      Career Assistant
+    </h2>
+
+  </div>
+
+  <button
+   onClick={() => setShowClearDialog(true)}
+    className="p-2 rounded-lg hover:bg-slate-100 transition"
+    title="Clear Chat"
+  >
+    <Trash2
+      size={20}
+      className="text-slate-600"
+    />
+  </button>
+
 </div>
       
-<div className="mt-8 space-y-4 max-h-[500px] overflow-y-auto">
+<div className="mt-6 space-y-4 h-[420px] md:h-[500px] overflow-y-auto pr-2">
 
   {messages.map((msg, index) => (
 
@@ -248,8 +292,8 @@ setMessage("");
       <div
   className={`${
     msg.sender === "user"
-      ? "max-w-[50%]"
-      : "max-w-[85%]"
+      ? "max-w-[85%] md:max-w-[60%]"
+      : "max-w-[90%] md:max-w-[75%]"
   } p-4 rounded-2xl whitespace-pre-line ${
     msg.sender === "user"
       ? "bg-blue-600 text-white"
@@ -302,39 +346,80 @@ setMessage("");
    <div ref={messagesEndRef}></div>
 </div>
 
-<div className="mt-4 flex gap-3">
+<div className="mt-6">
 
-<div className="w-full mt-6">
+  <div className="relative">
 
-  <textarea
-    rows="4"
-    value={message}
-    onChange={(e) => setMessage(e.target.value)}
-    placeholder="Ask about resumes, interviews, career guidance, or job applications..."
-    className="w-full border rounded-2xl p-4 resize-none"
-  />
+    <textarea
+      rows="3"
+      value={message}
+      onChange={(e) => setMessage(e.target.value)}
+      placeholder="Ask about resumes, interviews, career guidance, or job applications..."
+      className="w-full border rounded-2xl p-4 pb-12 resize-none focus:ring-2 focus:ring-blue-500 outline-none"
+    />
 
-  <div className="flex justify-end mt-4">
-
-  <button
-  onClick={askCareerAI}
-  disabled={loading}
-  className={`px-6 py-3 rounded-xl flex items-center gap-2 text-white transition ${
-    loading
-      ? "bg-slate-400 cursor-not-allowed"
-      : "bg-slate-700 hover:bg-slate-800"
-  }`}
->
-  <Send size={18} />
-  {loading ? "Thinking..." : "Ask"}
-</button>
+    <button
+      onClick={askCareerAI}
+      disabled={loading}
+      className={`absolute bottom-3 right-3 h-9 w-9 rounded-full flex items-center justify-center transition ${
+        loading
+          ? "bg-slate-400 cursor-not-allowed"
+          : "bg-slate-800 hover:bg-slate-900"
+      }`}
+    >
+      <ArrowUp
+  size={18}
+  strokeWidth={2.8}
+  className="text-white"
+/>
+    </button>
 
   </div>
 
 </div>
-
-</div>
      
+
+{showClearDialog && (
+
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+
+    <div className="bg-white rounded-2xl p-6 w-[90%] max-w-sm shadow-xl">
+
+      <h3 className="text-xl font-bold">
+        Clear Conversation?
+      </h3>
+
+      <p className="text-slate-600 mt-2">
+        This will permanently remove this chat history.
+      </p>
+
+      <div className="flex justify-end gap-3 mt-6">
+
+        <button
+          onClick={() => setShowClearDialog(false)}
+          className="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={() => {
+            clearChat();
+            setShowClearDialog(false);
+          }}
+          className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700"
+        >
+          Clear
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+)}
+
 </div>
 
 

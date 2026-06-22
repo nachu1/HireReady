@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaBars } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Sidebar from "../components/Sidebar";
 
@@ -17,6 +18,8 @@ const [resumeRequired,
   useState(false);
   const [resumePending,
   setResumePending] =
+  useState(false);
+  const [sidebarOpen, setSidebarOpen] =
   useState(false);
 
   const renderPage = () => {
@@ -50,20 +53,24 @@ const [resumeRequired,
   };
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-slate-100 to-blue-50">
+   <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-slate-100 to-blue-50">
 
-    <Sidebar
+   <Sidebar
   page={page}
   setPage={setPage}
-  setResumeRequired={
-    setResumeRequired
-  }
-  resumePending={
-    resumePending
-  }
+  setResumeRequired={setResumeRequired}
+  resumePending={resumePending}
+  sidebarOpen={sidebarOpen}
+  setSidebarOpen={setSidebarOpen}
 />
+{sidebarOpen && (
+  <div
+    className="fixed inset-0 bg-black/30 md:hidden z-40"
+    onClick={() => setSidebarOpen(false)}
+  />
+)}
 
-      <div className="flex-1 p-8">
+     <div className="flex-1 p-4 md:p-8">
 
        
 {resumeRequired === true && (
@@ -121,7 +128,14 @@ const [resumeRequired,
   </div>
 
 )}
-
+ <div className="md:hidden mb-4">
+  <button
+    onClick={() => setSidebarOpen(!sidebarOpen)}
+    className="bg-slate-900 text-white p-3 rounded-lg"
+  >
+    <FaBars size={22} />
+  </button>
+</div>
         <motion.div
   key={page}
   initial={{

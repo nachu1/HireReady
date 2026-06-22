@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import LoadingSpinner
-from "./LoadingSpinner";
+import{Copy} from "lucide-react";
 import { Mail } from "lucide-react";
 import { WandSparkles } from "lucide-react";
 
@@ -109,158 +108,170 @@ const copyCoverLetter = () => {
 
   return (
 
-    <div className="bg-white rounded-3xl shadow-xl p-6">
+  <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 max-w-5xl mx-auto">
 
     {validationError && (
 
-  <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6">
+      <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6">
 
-    <h3 className="font-semibold text-amber-700">
-      ⚠️ Unable to Continue
-    </h3>
+        <h3 className="font-semibold text-amber-700">
+          ⚠️ Unable to Continue
+        </h3>
 
-    <p className="text-amber-600 mt-1">
-      {validationError}
-    </p>
+        <p className="text-amber-600 mt-1">
+          {validationError}
+        </p>
 
-  </div>
+      </div>
 
-)}
-      {error && (
+    )}
 
-  <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6">
+    {error && (
 
-    <h3 className="font-semibold text-amber-700">
-      ⚠️ Service Temporarily Unavailable
-    </h3>
+      <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6">
 
-    <p className="text-amber-600 mt-1">
-      We are currently unable to process your request.
-      Please try again later.
-    </p>
+        <h3 className="font-semibold text-amber-700">
+          ⚠️ Service Temporarily Unavailable
+        </h3>
 
-  </div>
+        <p className="text-amber-600 mt-1">
+          We are currently unable to process your request.
+          Please try again later.
+        </p>
 
-)}
+      </div>
 
-      {!result && (
-  <>
+    )}
 
-   <div className="text-center mb-6">
+    {loading ? (
 
- <div className="text-center mb-6">
+      <div className="flex flex-col items-center justify-center py-20">
 
-  <h2 className="text-3xl font-bold flex items-center justify-center gap-3">
+        <div className="w-16 h-16 border-[5px] border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
 
-    <div className="bg-emerald-100 p-2 rounded-xl">
-  <Mail
-    size={24}
-    className="text-emerald-600"
-  />
-</div>
+        <h3 className="mt-6 text-xl font-semibold text-slate-800">
+          Generating Cover Letter...
+        </h3>
 
-    Create Your Cover Letter
+        <p className="mt-2 text-slate-500 text-center max-w-md">
+          Creating a personalized cover letter based on your resume and the job description.
+        </p>
 
-  </h2>
+      </div>
 
-  <p className="text-slate-500 mt-3">
-    Generate a personalized cover letter tailored to your target role.
-  </p>
+    ) : (
 
-</div>
+      !result && (
 
-  
+        <>
 
-</div>
-     
+          <div className="text-center mb-6">
 
-     <textarea
-  rows="8"
-  placeholder="Paste Job Description..."
-  value={jobDescription}
-  onChange={(e) => {
+            <h2 className="text-2xl md:text-3xl font-bold flex items-center justify-center gap-3 text-center">
 
-    setJobDescription(
-      e.target.value
-    );
+              <div className="bg-emerald-100 p-2 rounded-xl">
 
-    setValidationError("");
+                <Mail
+                  size={24}
+                  className="text-emerald-600"
+                />
 
-  }}
-  className="w-full border border-slate-300 rounded-2xl p-5 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
-/>
+              </div>
 
-     <div className="flex justify-center">
+              Create Your Cover Letter
 
-  {loading ? (
+            </h2>
 
-    <LoadingSpinner
-      text="Generating Cover Letter..."
-    />
+            <p className="text-base md:text-lg text-slate-500 mt-3">
+              Generate a personalized cover letter tailored to your target role.
+            </p>
 
-  ) : (
+          </div>
 
-    <button
-  onClick={generateCoverLetter}
-  className="bg-slate-700 hover:bg-slate-800 text-white px-6 py-3 rounded-xl flex items-center gap-2"
+          <textarea
+            rows="6"
+            placeholder="Paste Job Description..."
+            value={jobDescription}
+            onChange={(e) => {
+
+              setJobDescription(
+                e.target.value
+              );
+
+              setValidationError("");
+
+            }}
+            className="w-full border border-slate-300 rounded-2xl p-4 md:p-5 mb-6 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          <div className="flex justify-center">
+
+            <button
+              onClick={generateCoverLetter}
+              className="w-full sm:w-auto bg-slate-700 hover:bg-slate-800 text-white px-8 py-3 rounded-xl flex items-center justify-center gap-2 transition"
+            >
+
+              <WandSparkles size={18} />
+
+              Generate Cover Letter
+
+            </button>
+
+          </div>
+
+        </>
+
+      )
+
+    )}
+    {result && (
+
+  <div className="bg-white border rounded-3xl p-4 md:p-8 shadow-xl">
+
+    <div className="flex items-center justify-between gap-3 mb-6">
+
+      <h3 className="text-xl md:text-2xl font-bold">
+        Generated Cover Letter
+      </h3>
+
+      <button
+  onClick={copyCoverLetter}
+  className="bg-slate-100 hover:bg-slate-200 text-sm px-4 py-2 rounded-xl flex items-center gap-2 transition flex-shrink-0"
 >
-  <WandSparkles size={18} />
-  Generate Cover Letter
+  <Copy size={16} />
+  {copied ? "Copied" : "Copy"}
 </button>
-
-  )}
-
-</div>
-</>
-)}
-
-      {result && (
-
-        <div className="bg-white border rounded-3xl p-8 shadow-xl">
-
-          <div className="flex justify-between items-center mb-4">
-
-  <h3 className="text-xl font-bold">
-    Generated Cover Letter
-  </h3>
-
-  <button
-    onClick={copyCoverLetter}
-    className="text-sm bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-xl transition"
-  >
-    {copied
-      ? "✓ Copied"
-      : "📋 Copy"}
-  </button>
-
-</div>
-
-          <p className="whitespace-pre-line">
-            {result}
-          </p>
-          <div className="flex justify-center mt-8">
-
-  <button
-    onClick={() => {
-
-      setResult("");
-      setJobDescription("");
-
-    }}
-    className="bg-blue-600 text-white px-8 py-3 rounded-xl"
-  >
-    Generate Another Cover Letter
-  </button>
-
-</div>
-
-        </div>
-
-      )}
 
     </div>
 
-  );
+    <div className="whitespace-pre-line leading-8 text-slate-700">
+      {result}
+    </div>
+
+    <div className="flex justify-center mt-8">
+
+      <button
+        onClick={() => {
+
+          setResult("");
+          setJobDescription("");
+
+        }}
+        className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-xl transition"
+      >
+        Generate Another Cover Letter
+      </button>
+
+    </div>
+
+  </div>
+
+)}
+
+</div>
+
+);
+
 }
 
 export default CoverLetter;

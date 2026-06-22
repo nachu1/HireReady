@@ -12,7 +12,9 @@ function Sidebar({
   page,
   setPage,
   setResumeRequired,
-  resumePending
+  resumePending,
+  sidebarOpen,
+  setSidebarOpen
 }) {
 
   const hasResume =
@@ -70,19 +72,28 @@ const showPendingResume = () => {
 
   return (
 
-    <div className="w-72 bg-slate-900 text-white min-h-screen p-6">
+    <div
+  className={`
+    fixed md:static top-0 left-0 z-50
+    w-72 h-screen
+    bg-slate-900 text-white p-6
+    transform transition-transform duration-300
+    ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+    md:translate-x-0
+  `}
+>
 
-      <div className="flex items-center gap-3 mb-10">
+      <div className="flex items-center gap-3 mb-6 md:mb-10">
 
         <FaBrain size={30} />
 
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-xl md:text-2xl font-bold">
           HireReady
         </h2>
 
       </div>
 
-      <div className="flex flex-col justify-between h-[85vh]">
+      <div className="flex flex-col justify-between h-auto md:h-[85vh]">
 
         <ul className="space-y-4">
 
@@ -92,6 +103,7 @@ const showPendingResume = () => {
   setResumeRequired(false);
 
   setPage("ats");
+  setSidebarOpen(false);
 
 }}
             className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition ${
@@ -158,6 +170,7 @@ if (resumePending) {
 }
               setResumeRequired(false);
               setPage("cover");
+              setSidebarOpen(false);
 
             }}
             className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition ${
@@ -190,6 +203,7 @@ if (resumePending) {
 }
               setResumeRequired(false);
               setPage("chat");
+              setSidebarOpen(false);
 
             }}
             className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition ${
@@ -222,6 +236,7 @@ if (resumePending) {
 }
               setResumeRequired(false);
               setPage("interview");
+              setSidebarOpen(false);
 
             }}
             className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition ${

@@ -143,7 +143,7 @@ formData.append(
   return (
      
 
-    <div className="bg-white rounded-3xl shadow-xl p-6">
+    <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 max-w-5xl mx-auto">
        {downloadLoading && (
 
   <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 mb-6 flex items-center gap-4">
@@ -197,13 +197,13 @@ formData.append(
     />
   </div>
 
-  <h2 className="text-3xl font-bold">
+  <h2 className="text-2xl md:text-3xl font-bold text-center">
     Improve Your Resume
   </h2>
 
 </div>
 
-<p className="text-lg text-slate-600 mt-3">
+<p className="text-base md:text-lg text-slate-600 mt-3 text-center">
   Get personalized suggestions to strengthen your resume.
 </p>
 
@@ -211,11 +211,22 @@ formData.append(
 
 )}
 
-    {loading ? (
+   {loading ? (
 
-  <LoadingSpinner
-    text="Improving Resume..."
-  />
+  <div className="flex flex-col items-center justify-center py-16">
+
+    <div className="w-16 h-16 border-[5px] border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+
+    <h3 className="mt-6 text-xl font-semibold text-slate-800">
+      Improving Resume...
+    </h3>
+
+    <p className="mt-2 text-slate-500 text-center">
+       optimizing your resume.
+      Please wait...
+    </p>
+
+  </div>
 
 ) : (
 
@@ -223,7 +234,7 @@ formData.append(
 
     <button
       onClick={improveResume}
-      className="mt-6 bg-blue-600 text-white text-lg px-10 py-4 rounded-2xl shadow-lg"
+     className="mt-6 w-full sm:w-auto bg-blue-600 text-white text-base md:text-lg px-8 py-3 rounded-2xl shadow-lg hover:bg-blue-700 transition"
     >
       Improve Resume
     </button>
@@ -240,18 +251,18 @@ formData.append(
      
 
         <div className="mt-8 space-y-6">
-       <div className="flex items-center justify-between mb-6">
+       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
 
   <p className="text-slate-500 font-medium text-lg">
     Resume Version {version}
   </p>
 
-  <div className="flex gap-3">
+  <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
 
    <button
   onClick={improveResume}
   disabled={loading}
-  className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl flex items-center justify-center gap-2"
+  className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl flex items-center justify-center gap-2 transition"
 >
   <RefreshCw size={18} />
 
@@ -263,7 +274,7 @@ formData.append(
    <button
   onClick={downloadAIResume}
   disabled={downloadLoading}
-  className="bg-green-600 text-white px-6 py-3 rounded-xl disabled:opacity-50 flex items-center justify-center gap-2"
+  className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl disabled:opacity-50 flex items-center justify-center gap-2 transition"
 >
   {downloadLoading ? (
     "Generating..."
@@ -279,9 +290,9 @@ formData.append(
 
 </div>
 
-          <div className="bg-white rounded-3xl shadow-xl p-6">
+          <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6">
 
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+            <h2 className="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2">
   <FileText size={24} />
   Improved Summary
 </h2>
@@ -292,9 +303,9 @@ formData.append(
 
           </div>
 
-          <div className="bg-green-50 rounded-3xl p-6 shadow">
+          <div className="bg-green-50 rounded-3xl p-4 md:p-6 shadow">
 
-           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+           <h2 className="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2">
   <Target size={24} />
   Recommended Skills
 </h2>
@@ -317,9 +328,9 @@ formData.append(
 
           </div>
 
-   <div className="bg-white rounded-3xl shadow-xl p-6">
+   <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6">
 
-  <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+  <h2 className="text-xl md:text-2xl font-bold mb-6 flex items-center gap-2">
   <FolderKanban size={24} />
   Improved Projects
 </h2>
@@ -332,7 +343,7 @@ formData.append(
         className="mb-6 border-b pb-4"
       >
 
-        <h3 className="text-xl font-semibold mb-3">
+        <h3 className="text-lg md:text-xl font-semibold mb-3">
           {project.project_name}
         </h3>
 
@@ -363,9 +374,9 @@ formData.append(
 </div>
 
 
-          <div className="bg-blue-50 rounded-3xl p-6 shadow">
+          <div className="bg-blue-50 rounded-3xl p-4 md:p-6 shadow">
 
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-xl md:text-2xl font-bold mb-4">
               Resume Tips
             </h2>
 

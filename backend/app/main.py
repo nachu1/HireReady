@@ -485,6 +485,7 @@ async def career_chat_endpoint(
 
     resume_text = resume["resume_text"]
     chat_history = json.loads(history)
+    print("main.py called")
     result = career_chat(
         resume_text,
         message,
