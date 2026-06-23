@@ -108,7 +108,7 @@ const copyCoverLetter = () => {
 
   return (
 
-  <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 max-w-5xl mx-auto">
+  <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 w-full">
 
     {validationError && (
 

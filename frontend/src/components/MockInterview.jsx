@@ -210,7 +210,7 @@ if (percentage >= 80) {
 
   return (
 
-    <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 max-w-5xl mx-auto">
+    <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 w-full">
       {error && (
 
   <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6">

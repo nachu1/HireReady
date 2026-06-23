@@ -28,7 +28,9 @@ Format:
 
 Rules:
 
-- Score from 1 to 10.
+Rules:
+
+- Score from 0 to 10.
 - strengths: maximum 2 points.
 - improvements: maximum 2 points.
 - ideal_answer: maximum 50 words.
@@ -41,26 +43,28 @@ Rules:
 - Reserve scores below 4/10 for incorrect, irrelevant, or misleading answers.
 - Do not expect perfect interview answers from freshers.
 - Consider communication, technical accuracy, and completeness together.
+- Do not deduct many marks for minor grammar or English mistakes if the technical concept is correct.
+- Do not require examples unless the question specifically asks for one.
+- Evaluate the answer like a real interviewer interviewing a fresher, not a textbook examiner.
 
 Scoring:
 
-1-3 = Beginner
+0-3 = Beginner
 - Major technical mistakes or mostly incorrect answer.
 
 4-6 = Intermediate
 - Partial understanding.
 - Some correct concepts.
-- Missing depth, examples, or important details.
+- Missing depth or important details.
 
 7-8 = Good
 - Mostly correct.
 - Good explanation.
-- Relevant example provided.
 
 9-10 = Excellent
 - Technically accurate.
 - Clear explanation.
-- Strong example.
+- Strong understanding.
 - Interview-ready answer.
 
 Return JSON only.

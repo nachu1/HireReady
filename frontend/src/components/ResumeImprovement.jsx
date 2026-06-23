@@ -143,7 +143,7 @@ formData.append(
   return (
      
 
-    <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 max-w-5xl mx-auto">
+    <div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 w-full">
        {downloadLoading && (
 
   <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 mb-6 flex items-center gap-4">

@@ -285,7 +285,7 @@ setProgress(0);
 
   {!loading && !result && (
 
-<div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 mb-6 max-w-6xl mx-auto">
+<div className="bg-white rounded-3xl shadow-xl p-4 md:p-6 mb-6 w-full">
 
 <div className="flex items-center gap-3 mb-6">
 

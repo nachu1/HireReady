@@ -70,7 +70,7 @@ const [resumeRequired,
   />
 )}
 
-     <div className="flex-1 p-4 md:p-8">
+     <div className="flex-1 w-full max-w-none p-4 md:p-8">
 
        
 {resumeRequired === true && (
