@@ -31,8 +31,7 @@ Backend
 - ReportLab
 
 ## Live Demo
-Frontend: https://your-frontend-url
-Backend: https://your-backend-url
+Frontend: https://hireready-frontend-99jn.onrender.com
 
 ## Installation
 
