@@ -138,6 +138,7 @@ if (resumePending) {
 }
                setResumeRequired(false);
               setPage("resume");
+              setSidebarOpen(false);
 
             }}
             className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition ${
