@@ -33,9 +33,7 @@ HireReady is an AI-powered web application that helps job seekers analyze their 
 - PyMuPDF
 - ReportLab
 
-## Live Demo
 
-**Frontend:** https://hireready-frontend-99jn.onrender.com
 
 ## 🎥 Project Demo
 
